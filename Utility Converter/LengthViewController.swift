@@ -59,7 +59,7 @@ class LengthViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
     
     @IBAction func onButtonSavePressed(_ sender: UIButton)
     {
-        let focusedTextFieldValue = helper.unwrapString(optionalToUnwrap:txtField_focused.text)
+        let focusedTextFieldValue = helper.unwrapString(optionalString:txtField_focused.text)
         
         let isStringEmpty: Bool = focusedTextFieldValue.count == 0
         let endsWithDecimal: Bool = focusedTextFieldValue.last == "."
@@ -69,12 +69,12 @@ class LengthViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
         
         if(!(isStringEmpty || endsWithNegate || endsWithDecimal))
         {
-            let metre: String = helper.unwrapString(optionalToUnwrap:txtField_metre.text)
-            let mile: String = helper.unwrapString(optionalToUnwrap:txtField_mile.text)
-            let cm: String = helper.unwrapString(optionalToUnwrap:txtField_cm.text)
-            let mm: String = helper.unwrapString(optionalToUnwrap:txtField_mm.text)
-            let yard: String = helper.unwrapString(optionalToUnwrap:txtField_yard.text)
-            let inch: String = helper.unwrapString(optionalToUnwrap:txtField_inch.text)
+            let metre: String = helper.unwrapString(optionalString:txtField_metre.text)
+            let mile: String = helper.unwrapString(optionalString:txtField_mile.text)
+            let cm: String = helper.unwrapString(optionalString:txtField_cm.text)
+            let mm: String = helper.unwrapString(optionalString:txtField_mm.text)
+            let yard: String = helper.unwrapString(optionalString:txtField_yard.text)
+            let inch: String = helper.unwrapString(optionalString:txtField_inch.text)
             
             let length: String = "Metre: \(metre) \nMile: \(mile) \nCM: \(cm) \nMM: \(mm) \nYard: \(yard) \nInch: \(inch)"
             
@@ -117,7 +117,7 @@ class LengthViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
     
     func getCurrentTxtFieldValue() -> String
     {
-        return Helper().unwrapString(optionalToUnwrap: txtField_focused.text)
+        return Helper().unwrapString(optionalString: txtField_focused.text)
     }
     
     func keyWasTapped(processedString: String)
@@ -189,7 +189,7 @@ class LengthViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
         var double_yard: Double = 0
         var double_inch: Double = 0
         
-        let workingValue: Double = Helper().unwrapDouble(optionalToUnwrap: Double(value))
+        let workingValue: Double = Helper().unwrapDouble(optionalDouble: Double(value))
         
         switch metric
         {

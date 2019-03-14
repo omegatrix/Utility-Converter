@@ -50,7 +50,7 @@ class SpeedViewController: UIViewController, UITextFieldDelegate, KeyBoardDelega
     
     @IBAction func onButtonSavePressed(_ sender: UIButton)
     {
-        let focusedTextFieldValue = helper.unwrapString(optionalToUnwrap:txtField_focused.text)
+        let focusedTextFieldValue = helper.unwrapString(optionalString:txtField_focused.text)
         
         let isStringEmpty: Bool = focusedTextFieldValue.count == 0
         let endsWithDecimal: Bool = focusedTextFieldValue.last == "."
@@ -60,10 +60,10 @@ class SpeedViewController: UIViewController, UITextFieldDelegate, KeyBoardDelega
         
         if(!(isStringEmpty || endsWithNegate || endsWithDecimal))
         {
-            let metresPerSecond: String = helper.unwrapString(optionalToUnwrap:txtField_metresPerSecond.text)
-            let kmPerHour: String = helper.unwrapString(optionalToUnwrap:txtField_kmPerHour.text)
-            let milesPerHour: String = helper.unwrapString(optionalToUnwrap:txtField_milesPerHour.text)
-            let nauticalMilesPerHour: String = helper.unwrapString(optionalToUnwrap:txtField_nauticalMilesPerHour.text)
+            let metresPerSecond: String = helper.unwrapString(optionalString:txtField_metresPerSecond.text)
+            let kmPerHour: String = helper.unwrapString(optionalString:txtField_kmPerHour.text)
+            let milesPerHour: String = helper.unwrapString(optionalString:txtField_milesPerHour.text)
+            let nauticalMilesPerHour: String = helper.unwrapString(optionalString:txtField_nauticalMilesPerHour.text)
             
             let speed: String =
                 "Metres per second: " + metresPerSecond +
@@ -108,7 +108,7 @@ class SpeedViewController: UIViewController, UITextFieldDelegate, KeyBoardDelega
     
     func getCurrentTxtFieldValue() -> String
     {
-        return Helper().unwrapString(optionalToUnwrap: txtField_focused.text)
+        return Helper().unwrapString(optionalString: txtField_focused.text)
     }
     
     func keyWasTapped(processedString: String)
@@ -162,7 +162,7 @@ class SpeedViewController: UIViewController, UITextFieldDelegate, KeyBoardDelega
         var double_milesPerHour: Double = 0
         var double_nauticalMilesPerHour: Double = 0
         
-        let workingValue: Double = Helper().unwrapDouble(optionalToUnwrap: Double(value))
+        let workingValue: Double = Helper().unwrapDouble(optionalDouble: Double(value))
         
         switch metric
         {

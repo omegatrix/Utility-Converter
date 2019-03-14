@@ -59,7 +59,7 @@ class WeightViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
     
     @IBAction func onButtonSavePressed(_ sender: UIButton)
     {
-        let focusedTextFieldValue = helper.unwrapString(optionalToUnwrap:txtField_focused.text)
+        let focusedTextFieldValue = helper.unwrapString(optionalString:txtField_focused.text)
         
         let isStringEmpty: Bool = focusedTextFieldValue.count == 0
         let endsWithDecimal: Bool = focusedTextFieldValue.last == "."
@@ -69,12 +69,12 @@ class WeightViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
         
         if(!(isStringEmpty || endsWithNegate || endsWithDecimal))
         {
-            let kg: String = helper.unwrapString(optionalToUnwrap:txtField_kg.text)
-            let grams: String = helper.unwrapString(optionalToUnwrap:txtField_grams.text)
-            let ounces: String = helper.unwrapString(optionalToUnwrap:txtField_ounces.text)
-            let pounds: String = helper.unwrapString(optionalToUnwrap:txtField_pounds.text)
-            let stone: String = helper.unwrapString(optionalToUnwrap:txtField_stone.text)
-            let stonePounds: String = helper.unwrapString(optionalToUnwrap:txtField_stonePound.text)
+            let kg: String = helper.unwrapString(optionalString:txtField_kg.text)
+            let grams: String = helper.unwrapString(optionalString:txtField_grams.text)
+            let ounces: String = helper.unwrapString(optionalString:txtField_ounces.text)
+            let pounds: String = helper.unwrapString(optionalString:txtField_pounds.text)
+            let stone: String = helper.unwrapString(optionalString:txtField_stone.text)
+            let stonePounds: String = helper.unwrapString(optionalString:txtField_stonePound.text)
 
             let weight: String =
                 "KG: " + kg +
@@ -124,7 +124,7 @@ class WeightViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
     
     func getCurrentTxtFieldValue() -> String
     {
-        return helper.unwrapString(optionalToUnwrap: txtField_focused.text)
+        return helper.unwrapString(optionalString: txtField_focused.text)
     }
     
     func keyWasTapped(processedString: String)
@@ -192,7 +192,7 @@ class WeightViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
         var double_stone: Double = 0
         var double_stone_pound: Double = 0
         
-        let workingValue: Double = helper.unwrapDouble(optionalToUnwrap: Double(value))
+        let workingValue: Double = helper.unwrapDouble(optionalDouble: Double(value))
         
         switch metric
         {
@@ -257,7 +257,12 @@ class WeightViewController: UIViewController, UITextFieldDelegate, KeyBoardDeleg
             case STONE_POUND:
                 print("STONE_POUND")
                 double_stone_pound = workingValue
-                //needs work
+
+                double_kg = double_stone_pound / POUND_IN_ONE_KILOGRAM
+                double_grams = double_kg * GRAM_IN_ONE_KILOGRAM
+                double_ounce = double_kg * OUNCE_IN_ONE_KILOGRAM
+                double_stone = double_kg * STONE_IN_ONE_KILOGRAM
+                double_pound = double_kg * POUND_IN_ONE_KILOGRAM
                 break
             
             default:

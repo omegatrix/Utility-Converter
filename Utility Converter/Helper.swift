@@ -1,66 +1,72 @@
-//
-//  Helper.swift
-//  Utility Converter
-//
-//  Created by Emanual Mariampillai on 11/03/2019.
-//  Copyright © 2019 Arnold Anthonypillai. All rights reserved.
-//
+/*
+ This struct is being used by ViewControllers and provides
+ commom functionality such as optional unwrapping, Userdefault save and retrieve
+ */
 
 import UIKit
 
 struct Helper
 {
+    /* Metrics */
     let WEIGHT: String = "WEIGHT"
     let TEMPERATURE: String = "TEMPERATURE"
     let SPEED: String = "SPEED"
     let LIQUID: String = "LIQUID"
     let LENGTH: String = "LENGTH"
     
+    /* Metric history identifiers */
     let WEIGHT_HISTORY: String = "WEIGHT_HISTORY"
     let TEMPERATURE_HISTORY: String = "TEMPERATURE_HISTORY"
     let SPEED_HISTORY: String = "SPEED_HISTORY"
     let LIQUID_HISTORY: String = "LIQUID_HISTORY"
     let LENGTH_HISTORY: String = "LENGTH_HISTORY"
     
-    func unwrapString(optionalToUnwrap: String?) -> String
+    /* Optional unwrap -> String */
+    func unwrapString(optionalString: String?) -> String
     {
-        var resolvedString: String = ""
+        var unWrappedString: String = "" //default value to return
         
-        if let optionalToUnwrap = optionalToUnwrap
+        if let optionalString = optionalString
         {
-            resolvedString = optionalToUnwrap
+            unWrappedString = optionalString
         }
         
-        return resolvedString
+        print("Optional String unwraped -> \(unWrappedString)")
+        return unWrappedString
     }
     
-    func unwrapBoolean(optionalToUnwrap: Bool?) -> Bool
+    /* Optional unwrap -> Bool */
+    func unwrapBoolean(optionalBool: Bool?) -> Bool
     {
-        var resolvedBool: Bool = false
+        var unWrappedBool: Bool = false //default value to return
         
-        if let optionalToUnwrap = optionalToUnwrap
+        if let optionalBool = optionalBool
         {
-            resolvedBool = optionalToUnwrap
+            unWrappedBool = optionalBool
         }
         
-        return resolvedBool
+        print("Optional Bool unwraped -> \(unWrappedBool)")
+        return unWrappedBool
     }
     
-    func unwrapDouble(optionalToUnwrap: Double?) -> Double
+    /* Optional unwrap -> Double */
+    func unwrapDouble(optionalDouble: Double?) -> Double
     {
-        var resolvedDouble: Double = 0
+        var unWrappedDouble: Double = 0.0 //default value to return
         
-        if let optionalToUnwrap = optionalToUnwrap
+        if let optionalDouble = optionalDouble
         {
-            resolvedDouble = optionalToUnwrap
+            unWrappedDouble = optionalDouble
         }
         
-        return resolvedDouble
+        print("Optional Bool unwraped -> \(unWrappedDouble)")
+        return unWrappedDouble
     }
     
+    /* Prepares the saving data to User defaults by passing
+       the Metric History identifier along with the conversion to save */
     func saveConversion(type: String, conversion: String)
     {
-        print(type)
         switch type
         {
             case WEIGHT:
@@ -88,27 +94,30 @@ struct Helper
         }
     }
     
-    func getHistory(type: String) -> [String]
-    {
-    
-        let dataArray =  UserDefaults.standard.object(forKey: type) as? [String] ?? [String]()
-        
-        return dataArray
-    }
-    
+    /*
+         Saves data to User Defaults by satisfying one of the following conditions.
+     
+         (1) if User Default holds a key for the parameter 'metricToSave'
+             then :
+                -> if the length of the retrived metric data array is 5
+                    then remove the element at index 0 and append the new conversion to save.
+     
+                -> else append the new conversion to save to the retrieved metric data array
+     
+     (2) else User Defaults does not hold a key for the parameter 'metricToSave' then :
+            create a new key value to hold the metric history
+    */
     func saveToUserDefaults(metricToSave: String, conversionToSave: String)
     {
         if (UserDefaults.standard.object(forKey: metricToSave) != nil)
         {
-            print("print inside if")
             var dataArray = UserDefaults.standard.object(forKey: metricToSave) as? [String] ?? [String]()
-            
             let arrSize = dataArray.count
             
             if(arrSize == 5)
             {
-                let modifiedArray = dataArray.dropFirst()
-                dataArray = Array(modifiedArray)
+                let modifiedArray = dataArray.dropFirst() //removes the element at [0]
+                dataArray = Array(modifiedArray) //[String] -> <String>
                 dataArray.append(conversionToSave)
                 
                 UserDefaults.standard.set(dataArray, forKey: metricToSave)
@@ -123,11 +132,17 @@ struct Helper
             
         else
         {
-            print("inside else")
             let newHistoryArray = [conversionToSave]
             UserDefaults.standard.set(newHistoryArray, forKey: metricToSave)
         }
     }
     
+    /* retrives the data array of the given metric history identifier */
+    func getHistory(type: String) -> [String]
+    {
+        let dataArray =  UserDefaults.standard.object(forKey: type) as? [String] ?? [String]()
+        
+        return dataArray
+    }
 }
 

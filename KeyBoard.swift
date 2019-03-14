@@ -68,8 +68,8 @@ class KeyBoard: UIView
     
     @IBAction func keyTapped(_ sender: UIButton)
     {
-        let txtFieldValue: String = Helper().unwrapString(optionalToUnwrap: self.delegate?.getCurrentTxtFieldValue())
-        let titleLable: String = Helper().unwrapString(optionalToUnwrap: sender.titleLabel?.text) //optional unwrap button label
+        let txtFieldValue: String = Helper().unwrapString(optionalString: self.delegate?.getCurrentTxtFieldValue())
+        let titleLable: String = Helper().unwrapString(optionalString: sender.titleLabel?.text) //optional unwrap button label
         print("before current text field \(txtFieldValue) \n button label \(titleLable)")
         
         let processedString: String = textProcessor(stringToProcess: txtFieldValue, character: titleLable) //send the current text field value and the button label to process

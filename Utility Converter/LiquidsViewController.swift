@@ -54,7 +54,7 @@ class LiquidsViewController: UIViewController, UITextFieldDelegate, KeyBoardDele
     
     @IBAction func onButtonSavePressed(_ sender: UIButton)
     {
-        let focusedTextFieldValue = helper.unwrapString(optionalToUnwrap:txtField_focused.text)
+        let focusedTextFieldValue = helper.unwrapString(optionalString:txtField_focused.text)
         
         let isStringEmpty: Bool = focusedTextFieldValue.count == 0
         let endsWithDecimal: Bool = focusedTextFieldValue.last == "."
@@ -64,11 +64,11 @@ class LiquidsViewController: UIViewController, UITextFieldDelegate, KeyBoardDele
         
         if(!(isStringEmpty || endsWithNegate || endsWithDecimal))
         {
-            let gallon: String = helper.unwrapString(optionalToUnwrap:txtField_gallon.text)
-            let litre: String = helper.unwrapString(optionalToUnwrap:txtField_litre.text)
-            let ukPint: String = helper.unwrapString(optionalToUnwrap:txtField_ukPint.text)
-            let fluidOunce: String = helper.unwrapString(optionalToUnwrap:txtField_fluidOunce.text)
-            let millilitre: String = helper.unwrapString(optionalToUnwrap:txtField_millilitre.text)
+            let gallon: String = helper.unwrapString(optionalString:txtField_gallon.text)
+            let litre: String = helper.unwrapString(optionalString:txtField_litre.text)
+            let ukPint: String = helper.unwrapString(optionalString:txtField_ukPint.text)
+            let fluidOunce: String = helper.unwrapString(optionalString:txtField_fluidOunce.text)
+            let millilitre: String = helper.unwrapString(optionalString:txtField_millilitre.text)
             
             let liquid: String =
                 "Gallon: " + gallon +
@@ -115,7 +115,7 @@ class LiquidsViewController: UIViewController, UITextFieldDelegate, KeyBoardDele
     
     func getCurrentTxtFieldValue() -> String
     {
-        return Helper().unwrapString(optionalToUnwrap: txtField_focused.text)
+        return Helper().unwrapString(optionalString: txtField_focused.text)
     }
     
     func keyWasTapped(processedString: String)
@@ -182,7 +182,7 @@ class LiquidsViewController: UIViewController, UITextFieldDelegate, KeyBoardDele
         var double_millilitre: Double = 0
 
         
-        let workingValue: Double = Helper().unwrapDouble(optionalToUnwrap: Double(value))
+        let workingValue: Double = Helper().unwrapDouble(optionalDouble: Double(value))
         
         switch metric
         {

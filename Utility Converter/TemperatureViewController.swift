@@ -50,7 +50,7 @@ class TemperatureViewController: UIViewController, UITextFieldDelegate, KeyBoard
     
     @IBAction func onButtonSavePressed(_ sender: UIButton)
     {
-        let focusedTextFieldValue = helper.unwrapString(optionalToUnwrap:txtField_focused.text)
+        let focusedTextFieldValue = helper.unwrapString(optionalString:txtField_focused.text)
         
         let isStringEmpty: Bool = focusedTextFieldValue.count == 0
         let endsWithDecimal: Bool = focusedTextFieldValue.last == "."
@@ -60,9 +60,9 @@ class TemperatureViewController: UIViewController, UITextFieldDelegate, KeyBoard
         
         if(!(isStringEmpty || endsWithNegate || endsWithDecimal))
         {
-            let celsius: String = helper.unwrapString(optionalToUnwrap:txtField_celsius.text)
-            let fahrenheit: String = helper.unwrapString(optionalToUnwrap:txtField_fahrenheit.text)
-            let kelvin: String = helper.unwrapString(optionalToUnwrap:txtField_kelvin.text)
+            let celsius: String = helper.unwrapString(optionalString:txtField_celsius.text)
+            let fahrenheit: String = helper.unwrapString(optionalString:txtField_fahrenheit.text)
+            let kelvin: String = helper.unwrapString(optionalString:txtField_kelvin.text)
             
             let temperature: String =
                 "Celsius: " + celsius +
@@ -105,7 +105,7 @@ class TemperatureViewController: UIViewController, UITextFieldDelegate, KeyBoard
     
     func getCurrentTxtFieldValue() -> String
     {
-        return Helper().unwrapString(optionalToUnwrap: txtField_focused.text)
+        return Helper().unwrapString(optionalString: txtField_focused.text)
     }
     
     func keyWasTapped(processedString: String)
@@ -155,7 +155,7 @@ class TemperatureViewController: UIViewController, UITextFieldDelegate, KeyBoard
         var double_fahrenheit: Double = 0
         var double_kelvin: Double = 0
         
-        let workingValue: Double = Helper().unwrapDouble(optionalToUnwrap: Double(value))
+        let workingValue: Double = Helper().unwrapDouble(optionalDouble: Double(value))
         
         switch metric
         {

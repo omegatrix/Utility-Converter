@@ -10,7 +10,7 @@ import UIKit
 
 class HistoryViewController: UIViewController
 {
-    let helper = Helper()
+    let helper = Helper() // helper struct
     var selectedMetric: String = ""
     
     var weightArray = [String]()
@@ -93,93 +93,23 @@ class HistoryViewController: UIViewController
         switch selectedMetric
         {
             case helper.WEIGHT_HISTORY:
-                if(weightArray.count > 0)
-                {
-                    let maxIndex = weightArray.count - 1
-                    
-                    for index in 0...maxIndex
-                    {
-                        labelArray[index].text = weightArray[index]
-                    }
-                }
-                
-                else
-                {
-                    label_0.text = "No saved data available!"
-                }
-                
+                changeLabelContent(workinngArray: weightArray)
             break
             
             case helper.TEMPERATURE_HISTORY:
-                if(temperatureArray.count > 0)
-                {
-                    let maxIndex = temperatureArray.count - 1
-                    
-                    for index in 0...maxIndex
-                    {
-                        labelArray[index].text = temperatureArray[index]
-                    }
-                }
-                
-                else
-                {
-                    label_0.text = "No saved data available!"
-                }
-            
+                changeLabelContent(workinngArray: temperatureArray)
             break
             
             case helper.SPEED_HISTORY:
-                if(speedArray.count > 0)
-                {
-                    let maxIndex = speedArray.count - 1
-                    
-                    for index in 0...maxIndex
-                    {
-                        labelArray[index].text = speedArray[index]
-                    }
-                }
-                
-                else
-                {
-                    label_0.text = "No saved data available!"
-                }
-            
+                changeLabelContent(workinngArray: speedArray)
             break
             
             case helper.LIQUID_HISTORY:
-                if(liquidArray.count > 0)
-                {
-                    let maxIndex = liquidArray.count - 1
-                    
-                    for index in 0...maxIndex
-                    {
-                        labelArray[index].text = liquidArray[index]
-                    }
-                }
-                
-                else
-                {
-                    label_0.text = "No saved data available!"
-                }
-            
+                changeLabelContent(workinngArray: liquidArray)
             break
             
             case helper.LENGTH_HISTORY:
-                if(lengthArray.count > 0)
-                {
-                    let maxIndex = lengthArray.count - 1
-                    
-                    for index in 0...maxIndex
-                    {
-                        labelArray[index].text = lengthArray[index]
-                    }
-                }
-                
-                else
-                {
-                    label_0.text = "No saved data available!"
-                }
-            
+                changeLabelContent(workinngArray: lengthArray)
             break
 
             default:
@@ -189,11 +119,29 @@ class HistoryViewController: UIViewController
     
     func clearLabelContent()
     {
-        let maxIndex = labelArray.count - 1
+        let maxIndex = (labelArray.count - 1)
         
         for index in 0...maxIndex
         {
             labelArray[index].text = ""
+        }
+    }
+    
+    func changeLabelContent(workinngArray: [String])
+    {
+        if(workinngArray.count > 0)
+        {
+            let maxIndex = (workinngArray.count - 1)
+            
+            for index in 0...maxIndex
+            {
+                labelArray[index].text = workinngArray[index]
+            }
+        }
+            
+        else
+        {
+            label_0.text = "No saved data available!"
         }
     }
     
